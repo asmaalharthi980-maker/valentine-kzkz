@@ -1,1 +1,213 @@
-page2.html
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I LOVE U HABIBI 🌹</title>
+  <style>
+    :root{
+      --bg:#fff0f6;
+      --pink:#ff4d88;
+      --red:#ff2e63;
+      --stem:#2e8b57;
+      --leaf:#3cb371;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background: radial-gradient(circle at top, #ffe1ec, var(--bg));
+      overflow:hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    /* subtle floating hearts */
+    .hearts{
+      position:fixed; inset:0; z-index:-1; overflow:hidden;
+    }
+    .h{
+      position:absolute;
+      font-size:18px;
+      opacity:.7;
+      animation: drift linear infinite;
+    }
+    @keyframes drift{
+      from{transform:translateY(110vh) translateX(0) scale(var(--s));}
+      to{transform:translateY(-20vh) translateX(40px) scale(var(--s));}
+    }
+
+    .wrap{
+      text-align:center;
+      padding:24px;
+      width:min(520px, 92vw);
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.6);
+      border-radius:24px;
+      box-shadow: 0 18px 60px rgba(255,46,99,.16);
+    }
+
+    h1{
+      margin:10px 0 0;
+      font-size: clamp(34px, 7vw, 54px);
+      color:#b3003b;
+      letter-spacing:1px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.7);
+    }
+    .sub{
+      margin:6px 0 14px;
+      color:#7a1b3a;
+      opacity:.9;
+    }
+
+    /* CSS Rose */
+    .rose{
+      width:180px;
+      height:260px;
+      margin:0 auto 10px;
+      position:relative;
+      filter: drop-shadow(0 14px 28px rgba(255,46,99,.22));
+    }
+
+    .bloom{
+      position:absolute;
+      left:50%;
+      top:30px;
+      width:120px;
+      height:120px;
+      transform:translateX(-50%);
+      animation: sway 2.6s ease-in-out infinite;
+      transform-origin: 60px 120px;
+    }
+    @keyframes sway{
+      0%,100%{transform:translateX(-50%) rotate(-4deg) scale(1)}
+      50%{transform:translateX(-50%) rotate(4deg) scale(1.03)}
+    }
+
+    .petal{
+      position:absolute;
+      inset:0;
+      border-radius: 60% 40% 55% 45%;
+      background: radial-gradient(circle at 30% 30%, #ffd1e1, var(--pink), var(--red));
+      transform-origin:center;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .petal:nth-child(2){transform: rotate(25deg) scale(.93); opacity:.95}
+    .petal:nth-child(3){transform: rotate(-22deg) scale(.9); opacity:.92}
+    .petal:nth-child(4){transform: rotate(55deg) scale(.86); opacity:.88}
+    .petal:nth-child(5){transform: rotate(-58deg) scale(.84); opacity:.88}
+
+    @keyframes pulse{
+      0%,100%{filter:saturate(1); }
+      50%{filter:saturate(1.15);}
+    }
+
+    .center{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:34px;height:34px;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #ffefb0, #ffd166, #f4a261);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.35);
+    }
+
+    .stem{
+      position:absolute;
+      left:50%;
+      top:140px;
+      width:10px;
+      height:130px;
+      transform:translateX(-50%);
+      background: linear-gradient(180deg, var(--leaf), var(--stem));
+      border-radius:999px;
+      animation: stemSway 2.6s ease-in-out infinite;
+      transform-origin: top center;
+    }
+    @keyframes stemSway{
+      0%,100%{transform:translateX(-50%) rotate(2deg)}
+      50%{transform:translateX(-50%) rotate(-2deg)}
+    }
+
+    .leaf{
+      position:absolute;
+      width:62px; height:28px;
+      background: radial-gradient(circle at 30% 40%, #7ee2a8, var(--leaf), var(--stem));
+      border-radius: 60px 60px 60px 0;
+      top:185px;
+      animation: leafWiggle 2.6s ease-in-out infinite;
+    }
+    .leaf.left{
+      left: calc(50% - 58px);
+      transform: rotate(-18deg);
+    }
+    .leaf.right{
+      left: calc(50% - 2px);
+      transform: scaleX(-1) rotate(-18deg);
+      top:205px;
+    }
+    @keyframes leafWiggle{
+      0%,100%{filter:saturate(1); }
+      50%{filter:saturate(1.2);}
+    }
+
+    .btn{
+      margin-top:14px;
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      background: linear-gradient(135deg, var(--red), var(--pink));
+      color:white;
+      font-weight:800;
+      box-shadow: 0 10px 25px rgba(255,46,99,.30);
+      transition: transform .12s ease;
+    }
+    .btn:hover{transform: translateY(-2px)}
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="wrap">
+    <div class="rose" aria-label="Animated rose">
+      <div class="bloom">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="center"></div>
+      </div>
+      <div class="stem"></div>
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+    </div>
+
+    <h1>I LOVE U KHZOOOMI  💖</h1>
+    <div class="sub">وخلاص… تم قبول الطلب رسميًا 😌🌹</div>
+
+    <a class="btn" href="index.html">ارجع للصفحة الأولى ↩️</a>
+  </div>
+
+  <script>
+    const hearts = document.getElementById('hearts');
+    const emojis = ["💗","💘","💖","💕","❤️"];
+    for(let i=0;i<26;i++){
+      const s = document.createElement('div');
+      s.className = 'h';
+      s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      s.style.left = (Math.random()*100) + "vw";
+      s.style.animationDuration = (6 + Math.random()*8) + "s";
+      s.style.animationDelay = (-Math.random()*10) + "s";
+      s.style.setProperty('--s', (0.7 + Math.random()*1.6).toFixed(2));
+      s.style.fontSize = (14 + Math.random()*18) + "px";
+      hearts.appendChild(s);
+    }
+  </script>
+</body>
+</html>
+
