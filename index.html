@@ -1,1 +1,191 @@
-index.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentine 💘</title>
+  <style>
+    :root{
+      --pink:#ff4d88;
+      --red:#ff2e63;
+      --bg1:#ffe0ea;
+      --bg2:#ffd0df;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      overflow:hidden;
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+    }
+
+    /* floating hearts background */
+    .hearts{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      width:18px;height:18px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      border-radius: 4px;
+      opacity:.85;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 6px 10px rgba(255, 46, 99, .25));
+    }
+    .heart:before,.heart:after{
+      content:"";
+      position:absolute;
+      width:18px;height:18px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart:before{left:-9px; top:0}
+    .heart:after{left:0; top:-9px}
+
+    @keyframes floatUp{
+      from{transform:translateY(110vh) rotate(45deg) scale(var(--s));}
+      to{transform:translateY(-20vh) rotate(45deg) scale(var(--s));}
+    }
+
+    .card{
+      width:min(520px, 92vw);
+      padding:28px 22px;
+      background: rgba(255,255,255,.70);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.6);
+      border-radius:22px;
+      box-shadow: 0 18px 60px rgba(255,46,99,.18);
+      text-align:center;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(22px, 4.5vw, 34px);
+      color:#b3003b;
+      text-shadow: 0 1px 0 rgba(255,255,255,.6);
+    }
+    p{
+      margin:0 0 18px;
+      color:#7a1b3a;
+      opacity:.9;
+    }
+
+    .btns{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    button{
+      border:none;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      font-size:16px;
+    }
+    .yes{
+      background: linear-gradient(135deg, var(--red), var(--pink));
+      color:white;
+      box-shadow: 0 10px 25px rgba(255,46,99,.35);
+    }
+    .yes:hover{transform: translateY(-2px)}
+    .no{
+      background: white;
+      color:#b3003b;
+      border:1px solid rgba(179,0,59,.25);
+      box-shadow: 0 10px 25px rgba(179,0,59,.10);
+      position:relative;
+    }
+
+    .hint{
+      margin-top:14px;
+      font-size:13px;
+      opacity:.75;
+    }
+
+    .sparkle{
+      display:inline-block;
+      animation: pop 1.8s ease-in-out infinite;
+    }
+    @keyframes pop{
+      0%,100%{transform: translateY(0) rotate(0deg)}
+      50%{transform: translateY(-4px) rotate(-6deg)}
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card">
+    <h1>did u accsept to be my falintain ? <span class="sparkle">💘</span></h1>
+    <p>   “اذ اخترتي نوو بتتصفعي حبي   🤭</p>
+
+    <div class="btns">
+      <button class="yes" id="yesBtn">Yes 😍</button>
+      <button class="no" id="noBtn">No 😶</button>
+    </div>
+
+    <div class="hint">Tip: جرّبي تضغطي No… لو تقدري 😭</div>
+  </main>
+
+  <script>
+    // create floating hearts
+    const hearts = document.getElementById('hearts');
+    const count = 36;
+
+    for (let i=0;i<count;i++){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      const left = Math.random()*100;
+      const delay = Math.random()*8;
+      const dur = 6 + Math.random()*7;
+      const size = 0.6 + Math.random()*1.6;
+      h.style.left = left + 'vw';
+      h.style.animationDuration = dur + 's';
+      h.style.animationDelay = (-delay) + 's';
+      h.style.setProperty('--s', size.toFixed(2));
+      h.style.opacity = (0.35 + Math.random()*0.65).toFixed(2);
+      hearts.appendChild(h);
+    }
+
+    // buttons behavior
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn  = document.getElementById('noBtn');
+
+    yesBtn.addEventListener('click', () => {
+      window.location.href = "page2.html";
+    });
+
+    // make "No" button dodge the cursor/touch
+    function moveNoButton(){
+      const pad = 12;
+      const rect = noBtn.getBoundingClientRect();
+      const maxX = window.innerWidth - rect.width - pad;
+      const maxY = window.innerHeight - rect.height - pad;
+
+      const x = Math.max(pad, Math.random()*maxX);
+      const y = Math.max(pad, Math.random()*maxY);
+
+      noBtn.style.position = "fixed";
+      noBtn.style.left = x + "px";
+      noBtn.style.top  = y + "px";
+      noBtn.style.transform = "scale(1.02)";
+      setTimeout(()=> noBtn.style.transform="scale(1)", 120);
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); moveNoButton(); }, {passive:false});
+    noBtn.addEventListener('click', moveNoButton);
+  </script>
+</body>
+</html>
+
